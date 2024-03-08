@@ -10,7 +10,7 @@ from rliable import library as rly
 from rliable import metrics
 
 from plot_data import plot_game, plot_hparam, ATARI_100K_GAMES, experiments_mapping
-from utils import get_agent_metric, get_this_metric
+from utils import get_agent_metric, get_thc_metric
 
 
 for scale in ["100k", "40M"]:
@@ -33,7 +33,7 @@ for scale in ["100k", "40M"]:
             fig.savefig(f"{save_dir}/{ag}.pdf", bbox_inches='tight')
 
 """
-Get THIS metric between the 26 environments
+Get THC metric between the 26 environments
 """
 
 
@@ -46,7 +46,7 @@ Get THIS metric between the 26 environments
 #     for ag, hp_key in zip(["DER", "DrQ_eps"], keys):
 #         if ag == "DrQ_eps" and hparam == "num_atoms":
 #             continue
-#         hparam_val =  get_this_metric(data[hp_key])
+#         hparam_val =  get_thc_metric(data[hp_key])
 #         pd_dict['Algorithm'].append(ag)
 #         pd_dict['HParam'].append(k)
 #         pd_dict['Value'].append(hparam_val)
@@ -62,11 +62,11 @@ Get THIS metric between the 26 environments
 # print(df[df["Algorithm"] == 'DrQ_eps'][['HParam', 'Value']].to_dict())
 # sns.barplot(data=df, x='HParam', y='Value', hue='Algorithm')
 # plt.xticks(rotation = 90)
-# plt.savefig("figures/40M_experiments/importance_score/THIS_environments.pdf", bbox_inches='tight')
-# plt.savefig("figures/40M_experiments/importance_score/THIS_environments.png", bbox_inches='tight')
+# plt.savefig("figures/40M_experiments/importance_score/THC_environments.pdf", bbox_inches='tight')
+# plt.savefig("figures/40M_experiments/importance_score/THC_environments.png", bbox_inches='tight')
 
 """
-Get THIS metric between the 2 agents
+Get THC metric between the 2 agents
 """
 
 # pd_dict = {'Data Regime': [], 'HParam': [], 'Value': []}
@@ -88,16 +88,16 @@ Get THIS metric between the 2 agents
 # df = pd.DataFrame(pd_dict)
 # sns.barplot(data=df, x='HParam', y='Value', hue='Data Regime')
 # plt.xticks(rotation = 90)
-# plt.savefig("figures/split/importance_score/THIS_agents.pdf", bbox_inches='tight')
-# plt.savefig("figures/split/importance_score/THIS_agents.png", bbox_inches='tight')
+# plt.savefig("figures/split/importance_score/THC_agents.pdf", bbox_inches='tight')
+# plt.savefig("figures/split/importance_score/THC_agents.png", bbox_inches='tight')
 
 # for data_regime in ["100k", "40M"]:
 #     sns.barplot(data=df[df['Data Regime'] == data_regime], x='HParam', y='Value')
 #     plt.xticks(rotation = 90)
-#     plt.savefig(f"figures/{data_regime}_experiments/importance_score/THIS_agents.pdf", bbox_inches='tight')
-#     plt.savefig(f"figures/{data_regime}_experiments/importance_score/THIS_agents.pdf", bbox_inches='tight')
+#     plt.savefig(f"figures/{data_regime}_experiments/importance_score/THC_agents.pdf", bbox_inches='tight')
+#     plt.savefig(f"figures/{data_regime}_experiments/importance_score/THC_agents.pdf", bbox_inches='tight')
 
-"""THIS metric between data regimes"""
+"""THC metric between data regimes"""
 # pd_dict = {'Agent': [], 'HParam': [], 'Value': []}
 
 # for k, hparam in experiments_mapping.items():
@@ -124,5 +124,5 @@ Get THIS metric between the 2 agents
 # df = pd.DataFrame(pd_dict)
 # sns.barplot(data=df, x='HParam', y='Value', hue='Agent')
 # plt.xticks(rotation = 90)
-# plt.savefig("figures/split/importance_score/THIS_data_regimes.pdf", bbox_inches='tight')
-# plt.savefig("figures/split/importance_score/THIS_data_regimes.png", bbox_inches='tight')
+# plt.savefig("figures/split/importance_score/THC_data_regimes.pdf", bbox_inches='tight')
+# plt.savefig("figures/split/importance_score/THC_data_regimes.png", bbox_inches='tight')
