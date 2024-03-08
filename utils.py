@@ -7,8 +7,13 @@ import pandas as pd
 from rliable import library as rly
 from rliable import metrics
 
-from plot_data import ATARI_100K_GAMES
-
+ATARI_100K_GAMES = [
+            'Alien', 'Amidar', 'Assault', 'Asterix', 'BankHeist', 'BattleZone',
+            'Boxing', 'Breakout', 'ChopperCommand', 'CrazyClimber', 'DemonAttack',
+            'Freeway', 'Frostbite', 'Gopher', 'Hero', 'Jamesbond', 'Kangaroo',
+            'Krull', 'KungFuMaster', 'MsPacman', 'Pong', 'PrivateEye', 'Qbert',
+            'RoadRunner', 'Seaquest', 'UpNDown'
+            ]
 N_GAMES = len(ATARI_100K_GAMES)
 
 def area_under_the_curve(data):
