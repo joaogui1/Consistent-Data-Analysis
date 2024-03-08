@@ -52,10 +52,6 @@ def interval_to_ranking(scores):
                 break
 
 
-    # for idx, interval in enumerate(rank_by_high):
-    #     if interval.hi <= rank_by_high[idx - 1].lo: # statistically different
-    #         ranks[begin_equal:idx] = (begin_equal + 1 + idx - 1 + 1)/2 # average rank
-    #         begin_equal = idx
     return list(zip([mr.hparam for mr in rank_by_high], ranks))
 
 def iqm_to_ranking(scores):
