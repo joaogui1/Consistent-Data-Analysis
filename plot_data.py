@@ -74,8 +74,11 @@ def plot_iqm(all_experiments, colors=None, hp_values=None):
       xlabel='Human Normalized Score')
   return fig
 
-def split_plot_iqm(dict_100k, dict_40M, colors=None, hp_values=None):
-  IQM = lambda x: metrics.aggregate_iqm(x) # Interquartile Mean
+def split_plot(dict_100k, dict_40M, colors=None, hp_values=None, agg="IQM"):
+  aggregator_map = {"IQM": lambda x: metrics.aggregate_iqm(x),
+                    "Median": lambda x: metrics.aggregate_median(x),
+                    "Mean": lambda x: metrics.aggregate_mean(x),
+                    "Optimality Gap": lambda x: metrics.aggregate_optimality_gap(x)}
 
   algorithms = list(dict_100k.keys() | dict_40M.keys())
   colors = dict(zip(algorithms, sns.color_palette("pastel")))
@@ -92,7 +95,7 @@ def split_plot_iqm(dict_100k, dict_40M, colors=None, hp_values=None):
   colors = {**{k:colors[k.split("@100k")[0]] for k in dict_100k}, 
             **{k:colors[k.split("@40M")[0]] for k in dict_40M}}
 
-  aggregate_func = lambda x: np.array([IQM(x)])
+  aggregate_func = lambda x: np.array([aggregator_map[agg](x)])
   aggregate_scores, aggregate_interval_estimates = rly.get_interval_estimates(
       all_experiments, aggregate_func, reps=50000)
 
@@ -100,7 +103,7 @@ def split_plot_iqm(dict_100k, dict_40M, colors=None, hp_values=None):
   fig, _ = plot_utils.plot_interval_estimates(
       aggregate_scores, 
       aggregate_interval_estimates,
-      metric_names = ['IQM'],
+      metric_names = [agg],
       algorithms=hp_values,
       colors=colors,
       subfigure_width=5.0,
