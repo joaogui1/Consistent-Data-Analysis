@@ -74,7 +74,7 @@ def plot_iqm(all_experiments, colors=None, hp_values=None):
       xlabel='Human Normalized Score')
   return fig
 
-def split_plot(dict_100k, dict_40M, colors=None, hp_values=None, agg="IQM"):
+def split_plot_agg(dict_100k, dict_40M, colors=None, hp_values=None, agg="IQM"):
   aggregator_map = {"IQM": lambda x: metrics.aggregate_iqm(x),
                     "Median": lambda x: metrics.aggregate_median(x),
                     "Mean": lambda x: metrics.aggregate_mean(x),

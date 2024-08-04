@@ -2,7 +2,7 @@ import os
 import pickle
 
 import matplotlib.pyplot as plt
-from plot_data import split_plot, experiments_mapping, split_plot
+from plot_data import split_plot, experiments_mapping, split_plot_agg
 
 agents = ["DrQ_eps", "DER"]
 
@@ -30,7 +30,7 @@ for hyperparameter, hyp in experiments_mapping.items():
         print(f"data/{shims[1]}/final_perf/{hyp}.pickle not found")
         continue
 
-    for agg in ["Optimality Gap", "Mean", "Median", "IQM"]:
+    for agg in ["IQM", "Mean", "Median", "Optimality Gap"]:
         for ag in agents:
             if ag == "DrQ_eps" and hyp == "num_atoms":
                 continue
@@ -48,7 +48,7 @@ for hyperparameter, hyp in experiments_mapping.items():
             print(f"{ag}_{hyp}")
             final_perf_100k[f'{ag}_{hyp}'] = {k.split("_")[-1]:v for (k, v) in final_perf_100k[f'{ag}_{hyp}'].items()}
             final_perf_40M[f'{ag}_{hyp}'] = {k.split("_")[-1]:v for (k, v) in final_perf_40M[f'{ag}_{hyp}'].items()}
-            fig_iqm = split_plot(final_perf_100k[f'{ag}_{hyp}'],
+            fig_iqm = split_plot_agg(final_perf_100k[f'{ag}_{hyp}'],
                                     final_perf_40M[f'{ag}_{hyp}'], agg=agg)
 
             save_dir = f"figures/test/split/{agg}/{hyperparameter}"
